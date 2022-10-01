@@ -1,10 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import s from "../inputFullPrice/inputSlider.module.css";
 import Slider from "@mui/material/Slider/Slider";
-const MAX_TERM = 60
-const MIN_TERM = 1
-export const InputCreditTerm: React.FC = () => {
-  const [value, setValue] = useState<any>(MIN_TERM)
+
+type InputCreditTermType = {
+  value: number
+  setValue: (value: any) => void
+  maxValue: number
+  minValue: number
+}
+export const InputCreditTerm: React.FC<InputCreditTermType> = ({setValue,value,minValue,maxValue}) => {
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue);
   };
@@ -15,8 +19,8 @@ export const InputCreditTerm: React.FC = () => {
   return (
     <div className={s.wrapper}>
       <Slider
-        max={MAX_TERM}
-        min={MIN_TERM}
+        max={maxValue}
+        min={minValue}
         value={value}
         onChange={handleSliderChange}
         aria-labelledby="input-slider"

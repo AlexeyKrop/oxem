@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from "../inputFullPrice/inputSlider.module.css";
 import Slider from "@mui/material/Slider/Slider";
-const MAX_PERCENT = 60
-const MIN_PERCENT = 10
+
 type InputPaymentType = {
-  fullPrice: number
+  downPayment: number
+  percentValue: number
+  setValue: (value: any) => void
+  maxValue: number
+  minValue: number
 }
-export const InputPayment: React.FC<InputPaymentType> = ({fullPrice}) => {
-  const [value, setValue] = useState<any>(MIN_PERCENT)
-  const downPayment = Math.round(Number(fullPrice) * Number(value) / 100)
+export const InputPayment: React.FC<InputPaymentType> = ({downPayment,setValue,percentValue,minValue,maxValue}) => {
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue);
   };
@@ -16,23 +17,23 @@ export const InputPayment: React.FC<InputPaymentType> = ({fullPrice}) => {
     setValue(Number(event.target.value));
   };
   const handleBlur = () => {
-    if (MIN_PERCENT < 0) {
-      setValue(MIN_PERCENT);
-    } else if (value > MAX_PERCENT) {
-      setValue(MAX_PERCENT);
+    if (minValue < 0) {
+      setValue(minValue);
+    } else if (percentValue > maxValue) {
+      setValue(maxValue);
     }
   };
   return (
     <div className={s.wrapper}>
       <Slider
-        max={MAX_PERCENT}
-        min={MIN_PERCENT}
-        value={value}
+        max={maxValue}
+        min={minValue}
+        value={percentValue}
         onChange={handleSliderChange}
         aria-labelledby="input-slider"
       />
       <input onChange={handleInputChange} value={downPayment} onBlur={handleBlur}/>
-      <input className={s.input} value={value}  onChange={handleInputChange} onBlur={handleBlur}
+      <input className={s.input} value={percentValue}  onChange={handleInputChange} onBlur={handleBlur}
              />
     </div>
   );
