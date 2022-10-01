@@ -3,8 +3,8 @@ import {InputFullPrice} from "./inputFullPrice/InputFullPrice";
 import {InputPayment} from "./inputPayment/InputPayment";
 import {InputCreditTerm} from "./inputСreditTerm/InputCreditTerm";
 import {LoanCalculation} from "./loanСalculation/LoanCalculation";
-import s from './costCalculation.module.css'
 import {createTheme, ThemeProvider} from '@mui/material/styles'
+import {calculateAPI} from "../../api/calculate";
 
 const MAX_PRICE = 6000000
 const MIN_PRICE = 1000000
@@ -29,33 +29,34 @@ export const CostCalculation: React.FC = () => {
   const [percentValue, setPercentValue] = useState<any>(MIN_PERCENT)
   const [monthsTermValue, setMonthsTermValue] = useState<any>(MIN_TERM)
   const initialPayment = Math.round(Number(fullPrice) * Number(percentValue) / 100)
+
+  const handleClick = () => {
+    calculateAPI.sendData({fullPrice, percentValue, monthsTermValue, initialPayment}).then(res => console.log(res))
+  }
   return (
     <ThemeProvider theme={theme}>
-      <div className={s.wrapper}>
-        <h2>Рассчитайте стоимость автомобиля в лизинг</h2>
-        <div className={s.inputWrapper}>
-          <div className={s.fullPrice}>
-            <InputFullPrice maxValue={MAX_PRICE}
-                            minValue={MIN_PRICE}
-                            value={fullPrice}
-                            setValue={setFullPrice}/></div>
-          <div className={s.payment}><InputPayment maxValue={MAX_PERCENT}
-                                                   minValue={MIN_PERCENT}
-                                                   downPayment={initialPayment}
-                                                   setValue={setPercentValue}
-                                                   percentValue={percentValue}/></div>
-          <div className={s.creditTerm}><InputCreditTerm maxValue={MAX_TERM}
-                                                         minValue={MIN_TERM}
-                                                         value={monthsTermValue}
-                                                         setValue={setMonthsTermValue}/>
-          </div>
-          <div className={s.loanCalculation}><LoanCalculation fullPrice={fullPrice}
-                                                              monthsTermValue={monthsTermValue}
-                                                              initialPayment={initialPayment}/>
-          </div>
+      <h2>Рассчитайте стоимость автомобиля в лизинг</h2>
+      <InputFullPrice maxValue={MAX_PRICE}
+                      minValue={MIN_PRICE}
+                      value={fullPrice}
+                      setValue={setFullPrice}/>
+      <p>Первоначальный взнос</p>
+      <InputPayment maxValue={MAX_PERCENT}
+                    minValue={MIN_PERCENT}
+                    downPayment={initialPayment}
+                    setValue={setPercentValue}
+                    percentValue={percentValue}/>
 
-        </div>
-      </div>
+      <p>Срок лизинга</p>
+      <InputCreditTerm maxValue={MAX_TERM}
+                       minValue={MIN_TERM}
+                       value={monthsTermValue}
+                       setValue={setMonthsTermValue}/>
+
+      <LoanCalculation fullPrice={fullPrice}
+                       monthsTermValue={monthsTermValue}
+                       initialPayment={initialPayment}/>
+    <button onClick={handleClick}>Оформить заявку</button>
     </ThemeProvider>
   );
 };

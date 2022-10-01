@@ -1,5 +1,4 @@
 import React from 'react';
-import s from "../inputFullPrice/inputFullPrice.module.css";
 import Slider from "@mui/material/Slider/Slider";
 
 type InputPaymentType = {
@@ -31,22 +30,19 @@ export const InputPayment: React.FC<InputPaymentType> = ({
   };
   return (
     <>
-      <p>Первоначальный взнос</p>
-      <div className={s.wrapper}>
-        <Slider
-          className={s.slider}
-          max={maxValue}
-          min={minValue}
-          value={percentValue}
-          onChange={handleSliderChange}
-          aria-labelledby="input-slider"
-        />
-        <input className={s.input} onChange={handleInputChange} value={downPayment}
-               onBlur={handleBlur}/>
-        <input className={s.inputPercent} value={percentValue}
-               onChange={handleInputChange} onBlur={handleBlur}
-        />
-      </div>
+      <Slider
+        max={maxValue}
+        min={minValue}
+        value={percentValue}
+        onChange={handleSliderChange}
+        aria-labelledby="input-slider"
+      />
+      <input onChange={handleInputChange} value={downPayment}
+             onBlur={handleBlur}/>
+      <input value={percentValue}
+             onChange={handleInputChange} onBlur={handleBlur}
+      />
+
     </>
   );
 };

@@ -1,13 +1,19 @@
 import Slider from '@mui/material/Slider/Slider';
 import React from 'react';
-import s from './inputFullPrice.module.css'
+
+
 type InputFullPriceType = {
   maxValue: number
   minValue: number
   value: number
   setValue: (value: number | number[]) => void
 }
-export const InputFullPrice: React.FC<InputFullPriceType> = ({value, setValue, minValue,maxValue}) => {
+export const InputFullPrice: React.FC<InputFullPriceType> = ({
+                                                               value,
+                                                               setValue,
+                                                               minValue,
+                                                               maxValue
+                                                             }) => {
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue);
   };
@@ -22,18 +28,18 @@ export const InputFullPrice: React.FC<InputFullPriceType> = ({value, setValue, m
     }
   };
   return (
-    <div className={s.wrapper}>
+    <div >
       <p>Стоимость автомобиля</p>
       <Slider
-        className={s.slider}
         max={maxValue}
         min={minValue}
         value={value}
         onChange={handleSliderChange}
         aria-labelledby="input-slider"
       />
-      <input className={s.input} value={value}  onChange={handleInputChange}
+      <input value={value} onChange={handleInputChange}
              onBlur={handleBlur}/>
+
     </div>
   );
 };
