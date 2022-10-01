@@ -5,7 +5,7 @@ import {CostCalculation} from "./pages/costCalculation/CostCalculation";
 export const App = () => {
 
   return (
-    <div className="App">
+    <div className="App container">
       <header className="App-header">
 
       </header>

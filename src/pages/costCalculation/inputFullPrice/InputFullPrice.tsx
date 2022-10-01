@@ -1,6 +1,6 @@
 import Slider from '@mui/material/Slider/Slider';
 import React from 'react';
-import s from './inputSlider.module.css'
+import s from './inputFullPrice.module.css'
 type InputFullPriceType = {
   maxValue: number
   minValue: number
@@ -23,7 +23,9 @@ export const InputFullPrice: React.FC<InputFullPriceType> = ({value, setValue, m
   };
   return (
     <div className={s.wrapper}>
+      <p>Стоимость автомобиля</p>
       <Slider
+        className={s.slider}
         max={maxValue}
         min={minValue}
         value={value}
