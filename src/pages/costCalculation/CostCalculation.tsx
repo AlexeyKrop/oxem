@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import {InputFullPrice} from "./inputFullPrice/InputFullPrice";
-import {InputPayment} from "./inputPayment/InputPayment";
-import {InputCreditTerm} from "./inputСreditTerm/InputCreditTerm";
 import {LoanCalculation} from "./loanСalculation/LoanCalculation";
 import {createTheme, ThemeProvider} from '@mui/material/styles'
 import {calculateAPI} from "../../api/calculate";
+import {InputSlider} from "./inputSlider/InputSlider";
 
 const MAX_PRICE = 6000000
 const MIN_PRICE = 1000000
@@ -29,34 +27,34 @@ export const CostCalculation: React.FC = () => {
   const [percentValue, setPercentValue] = useState<any>(MIN_PERCENT)
   const [monthsTermValue, setMonthsTermValue] = useState<any>(MIN_TERM)
   const initialPayment = Math.round(Number(fullPrice) * Number(percentValue) / 100)
-
   const handleClick = () => {
-    calculateAPI.sendData({fullPrice, percentValue, monthsTermValue, initialPayment}).then(res => console.log(res))
+    calculateAPI.sendData({
+      fullPrice,
+      percentValue,
+      monthsTermValue,
+      initialPayment
+    }).then(res => console.log(res))
   }
   return (
     <ThemeProvider theme={theme}>
       <h2>Рассчитайте стоимость автомобиля в лизинг</h2>
-      <InputFullPrice maxValue={MAX_PRICE}
-                      minValue={MIN_PRICE}
-                      value={fullPrice}
-                      setValue={setFullPrice}/>
-      <p>Первоначальный взнос</p>
-      <InputPayment maxValue={MAX_PERCENT}
-                    minValue={MIN_PERCENT}
-                    downPayment={initialPayment}
-                    setValue={setPercentValue}
-                    percentValue={percentValue}/>
-
-      <p>Срок лизинга</p>
-      <InputCreditTerm maxValue={MAX_TERM}
-                       minValue={MIN_TERM}
-                       value={monthsTermValue}
-                       setValue={setMonthsTermValue}/>
+      <InputSlider
+        title={'Стоимость автомобиля'}
+        maxValue={MAX_PRICE}
+        minValue={MIN_PRICE}
+        value={fullPrice}
+        setValue={setFullPrice}/>
+      <InputSlider title='Первоначальный взнос' mode={'payment'}
+                   initialPayment={initialPayment}
+                   maxValue={MAX_PERCENT} minValue={MIN_PERCENT} value={percentValue}
+                   setValue={setPercentValue}/>
+      <InputSlider title={'Срок лизинга'} maxValue={MAX_TERM} minValue={MIN_TERM}
+                   value={monthsTermValue} setValue={setMonthsTermValue}/>
 
       <LoanCalculation fullPrice={fullPrice}
                        monthsTermValue={monthsTermValue}
                        initialPayment={initialPayment}/>
-    <button onClick={handleClick}>Оформить заявку</button>
+      <button onClick={handleClick}>Оформить заявку</button>
     </ThemeProvider>
   );
 };
