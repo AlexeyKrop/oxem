@@ -4,6 +4,7 @@ import {createTheme, ThemeProvider} from '@mui/material/styles'
 import {calculateAPI} from "../../api/calculate";
 import {InputSlider} from "./inputSlider/InputSlider";
 import s from './costCalculation.module.css'
+import {Loader} from "../../component/loader/Loader";
 
 const MAX_PRICE = 6000000
 const MIN_PRICE = 1000000
@@ -27,10 +28,10 @@ export const CostCalculation: React.FC = () => {
   const [fullPrice, setFullPrice] = useState<any>(MIN_PRICE)
   const [percentValue, setPercentValue] = useState<any>(MIN_PERCENT)
   const [monthsTermValue, setMonthsTermValue] = useState<any>(MIN_TERM)
-  const [disabled, setDisabled] = useState(false)
+  const [loading, setLoading] = useState(false)
   const initialPayment = Math.round(Number(fullPrice) * Number(percentValue) / 100)
   const handleClick = () => {
-    setDisabled(true)
+    setLoading(true)
     calculateAPI.sendData({
       fullPrice,
       percentValue,
@@ -39,7 +40,7 @@ export const CostCalculation: React.FC = () => {
     }).then(res => console.log(res))
       .catch(err => console.log(err))
     setTimeout(() => {
-      setDisabled(false)
+      setLoading(false)
     }, 2000)
   }
   return (
@@ -67,13 +68,13 @@ export const CostCalculation: React.FC = () => {
                          monthsTermValue={monthsTermValue}
                          initialPayment={initialPayment}/>
         <div className={s.btnBlock}>
-          <button
-            disabled={disabled}
+          {loading ? <Loader/> : <button
+            disabled={loading}
             className={s.btn}
             onClick={handleClick}
           >
             Оставить заявку
-          </button>
+          </button>}
         </div>
 
       </div>
