@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/oxem/static/css/main.dbf31277.css",
+    "main.js": "/oxem/static/js/main.4d72799e.js",
+    "static/js/787.73f4312c.chunk.js": "/oxem/static/js/787.73f4312c.chunk.js",
+    "index.html": "/oxem/index.html",
+    "main.dbf31277.css.map": "/oxem/static/css/main.dbf31277.css.map",
+    "main.4d72799e.js.map": "/oxem/static/js/main.4d72799e.js.map",
+    "787.73f4312c.chunk.js.map": "/oxem/static/js/787.73f4312c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dbf31277.css",
+    "static/js/main.4d72799e.js"
+  ]
+}
