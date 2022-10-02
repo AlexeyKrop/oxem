@@ -18,9 +18,9 @@ export const LoanCalculation: React.FC<LoanCalculationType> = ({
   return (
     <div className={s.wrapperPrice}>
       <div className={s.content}><span className={s.title}>Сумма договора</span>
-        <p className={s.price}>{amountPay}</p></div>
+        <p className={s.price}>{amountPay}₽</p></div>
       <div className={s.content}><span className={s.title}>Ежемесячный платеж</span>
-        <p className={s.price}>{monthPay}</p></div>
+        <p className={s.price}>{monthPay}₽</p></div>
     </div>
 
   )

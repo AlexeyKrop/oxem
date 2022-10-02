@@ -67,6 +67,15 @@
     background: #FFFFFF
 
 }
+.temp{
+    font-weight: 900;
+    font-size: 30px;
+    margin: 0;
+    position: absolute;
+    right: 10%;
+    top: 58%;
+    color: #575757;
+}
 @media (max-width: 1024px) {
     .wrapper, .input{
         max-width: none;

@@ -4,6 +4,7 @@ import s from './inputSlider.module.css'
 
 type InputSliderType = {
   mode?: 'payment' | 'all'
+  temp?: string
   initialPayment?: number
   title: string
   maxValue: number
@@ -12,6 +13,7 @@ type InputSliderType = {
   setValue: (value: number | number[]) => void
 }
 export const InputSlider: React.FC<InputSliderType> = ({
+                                                         temp,
                                                          value,
                                                          setValue,
                                                          minValue,
@@ -25,7 +27,7 @@ export const InputSlider: React.FC<InputSliderType> = ({
   };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value
-    value = value.replace (/\D/, '')
+    value = value.replace(/\D/, '')
     setValue(Number(value));
   };
   const handleBlur = () => {
@@ -46,11 +48,20 @@ export const InputSlider: React.FC<InputSliderType> = ({
         onChange={handleSliderChange}
         aria-labelledby="input-slider"
       />
-      {mode === 'payment' &&
-      <input className={s.inputPercent} onChange={handleInputChange} value={value}
-             onBlur={handleBlur}/>}
-      <input className={s.input} value={value} onChange={handleInputChange}
-             onBlur={handleBlur}/>
+      {mode === 'payment' ?
+        <>
+          <input className={s.inputPercent} onChange={handleInputChange}
+                 value={`${value}%`}
+                 onBlur={handleBlur}/>
+          <>
+            <input className={s.input} value={`${initialPayment}₽`} onChange={handleInputChange}
+                   onBlur={handleBlur}/></>
+        </>
+        :
+        <>
+          <input className={s.input} value={value} onChange={handleInputChange}
+                 onBlur={handleBlur}/> <p className={s.temp}>{temp}</p></>}
+
 
     </div>
   );
