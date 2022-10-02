@@ -1,0 +1,59 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 320px;
+}
+
+.title {
+    max-width: 750px;
+    margin: 0 0 32px 0;
+    font-weight: 900;
+    font-size: 54px;
+    color: #111111;
+}
+
+.btnBlock {
+    width: 100%;
+    max-width: 430px;
+}
+
+.btn {
+    cursor: pointer;
+    width: 100%;
+    padding: 14px 0;
+    border-radius: 40px;
+    background: #FF9514;
+    outline: none;
+    border: none;
+
+    font-weight: 900;
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+.btn:hover {
+    background: #111111;
+}
+
+.btn:active {
+    background: #575757;
+}
+
+.btn:disabled {
+    background: rgba(255, 149, 20, 0.4);
+}
+
+@media (max-width: 1024px) {
+    .wrapper {
+        flex-direction: column;
+        align-items: flex-start
+    }
+}
+
+@media (max-width: 768px) {
+    .btn {
+        font-size: 22px
+    }
+}

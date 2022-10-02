@@ -3,6 +3,7 @@ import {LoanCalculation} from "./loanСalculation/LoanCalculation";
 import {createTheme, ThemeProvider} from '@mui/material/styles'
 import {calculateAPI} from "../../api/calculate";
 import {InputSlider} from "./inputSlider/InputSlider";
+import s from './costCalculation.module.css'
 
 const MAX_PRICE = 6000000
 const MIN_PRICE = 1000000
@@ -37,24 +38,34 @@ export const CostCalculation: React.FC = () => {
   }
   return (
     <ThemeProvider theme={theme}>
-      <h2>Рассчитайте стоимость автомобиля в лизинг</h2>
-      <InputSlider
-        title={'Стоимость автомобиля'}
-        maxValue={MAX_PRICE}
-        minValue={MIN_PRICE}
-        value={fullPrice}
-        setValue={setFullPrice}/>
-      <InputSlider title='Первоначальный взнос' mode={'payment'}
-                   initialPayment={initialPayment}
-                   maxValue={MAX_PERCENT} minValue={MIN_PERCENT} value={percentValue}
-                   setValue={setPercentValue}/>
-      <InputSlider title={'Срок лизинга'} maxValue={MAX_TERM} minValue={MIN_TERM}
-                   value={monthsTermValue} setValue={setMonthsTermValue}/>
+      <h2 className={s.title}>Рассчитайте стоимость автомобиля в лизинг</h2>
+      <div className={s.wrapper}>
+        <InputSlider
+          title={'Стоимость автомобиля'}
+          maxValue={MAX_PRICE}
+          minValue={MIN_PRICE}
+          value={fullPrice}
+          setValue={setFullPrice}/>
+        <InputSlider title='Первоначальный взнос' mode={'payment'}
+                     initialPayment={initialPayment}
+                     maxValue={MAX_PERCENT} minValue={MIN_PERCENT} value={percentValue}
+                     setValue={setPercentValue}/>
+        <InputSlider title={'Срок лизинга'} maxValue={MAX_TERM} minValue={MIN_TERM}
+                     value={monthsTermValue} setValue={setMonthsTermValue}/>
 
-      <LoanCalculation fullPrice={fullPrice}
-                       monthsTermValue={monthsTermValue}
-                       initialPayment={initialPayment}/>
-      <button onClick={handleClick}>Оформить заявку</button>
+        <LoanCalculation fullPrice={fullPrice}
+                         monthsTermValue={monthsTermValue}
+                         initialPayment={initialPayment}/>
+        <div className={s.btnBlock}>
+          <button
+            className={s.btn}
+            onClick={handleClick}
+          >
+            Оставить заявку
+          </button>
+        </div>
+
+      </div>
     </ThemeProvider>
   );
 };

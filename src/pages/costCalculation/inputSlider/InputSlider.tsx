@@ -24,7 +24,9 @@ export const InputSlider: React.FC<InputSliderType> = ({
     setValue(newValue);
   };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(Number(event.target.value));
+    let value = event.target.value
+    value = value.replace (/\D/, '')
+    setValue(Number(value));
   };
   const handleBlur = () => {
     if (minValue < 0) {
@@ -35,7 +37,7 @@ export const InputSlider: React.FC<InputSliderType> = ({
   };
   return (
     <div className={s.wrapper}>
-      <p>{title}</p>
+      <p className={s.title}>{title}</p>
       <Slider
         className={s.slider}
         max={maxValue}

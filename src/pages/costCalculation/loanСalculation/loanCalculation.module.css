@@ -1,0 +1,36 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.wrapperPrice{
+    max-width: 922px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.content{
+    width: 100%;
+    max-width: 430px;
+    text-align: left;
+}
+.title{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #575757;
+}
+.price{
+    margin: 8px 0;
+    font-weight: 900;
+    font-size: 54px;
+    color: #575757;
+}
+@media (max-width: 1024px) {
+    .content{
+        width: 100%;
+        max-width: 320px;
+    }
+}

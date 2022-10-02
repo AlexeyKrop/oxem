@@ -1,9 +1,10 @@
-.wrapper{
+.wrapper {
     position: relative;
     width: 100%;
     max-width: 430px;
 }
-.input{
+
+.input {
     box-sizing: border-box;
 
     max-width: 430px;
@@ -22,16 +23,27 @@
     border-radius: 16px;
 }
 
-.slider{
+.input:focus {
+    background: #FFFFFF
+}
+
+.slider {
     position: absolute !important;
     width: 90% !important;
     bottom: -14%;
     left: 6%;
 }
 
-.inputPercent{
+.title {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #575757;
+}
+
+.inputPercent {
     position: absolute;
-    top: 45%;
+    top: 52%;
     right: 6%;
 
 
@@ -49,4 +61,17 @@
     outline: none;
     background: #EBEBEC;
     border-radius: 16px;
+}
+
+.inputPercent:focus {
+    background: #FFFFFF
+
+}
+@media (max-width: 1024px) {
+    .wrapper, .input{
+        max-width: none;
+    }
+    .wrapper{
+        margin-bottom: 32px;
+    }
 }
